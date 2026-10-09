@@ -6,18 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <title>Tink</title>
-</head>
+    <title>Tink Games</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 
 <body>
     <main class="home-container">
-        <h1>Tink</h1>
-        <p>Little games. Lots of fun.</p>
+        <h1>Games</h1>
+        <p>Choose a game to play.</p>
         <div class="home-actions">
-            <button>Login</button>
-            <button>Create Account</button>
-            <a href="{{ url_for('games') }}">
-                Play as Guest</a>
+            <a href="{{ url_for('minesweeper') }}">
+                Minesweeper</a>
         </div>
     </main>
 </body>
