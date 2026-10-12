@@ -13,7 +13,10 @@ def games():
 
 @app.route("/games/minesweeper")
 def minesweeper():
-    return render_template('minesweeper.html')
+    rows = 9
+    cols = 9
+    return render_template('minesweeper.html',
+                           rows=rows, cols=cols)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

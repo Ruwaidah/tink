@@ -1,0 +1,52 @@
+.home-container {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 64px;
+}
+
+p {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.home-actions {
+    margin-top: 30px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.home-actions button {
+    width: 220px;
+    padding: 12px 20px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.home-actions a {
+    width: 220px;
+    padding: 12px 20px;
+
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+
+    color: black;
+    background-color: #eeeeee;
+
+    border: 1px solid #888888;
+
+    box-sizing: border-box;
+    cursor: pointer;
+}

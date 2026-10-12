@@ -5,25 +5,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Minesweeper | Tink</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/minesweeper.css') }}">
+    <title>Minesweeper | Tink</title>
 </head>
 
 <body>
     <main class="home-container">
         <h1>Minesweeper</h1>
         <p>Game coming together..</p>
-        <div class="minesweeper-board">
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
+        <div class="minesweeper-board" style="--cols: {{ cols }}; --rows: {{ rows }};">
+            {% for row in range(rows) %}
+            {% for col in range(cols) %}
+            <button class="cell" data-row="{{ row }}" data-col="{{ col }}" type="button">
+            </button>
+            {% endfor %}
+            {% endfor %}
         </div>
     </main>
 </body>
