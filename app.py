@@ -31,11 +31,9 @@ def create_board(rows, cols, mine_count):
 
     return board
 
-
 @app.route('/')
 def home():
     return render_template('index.html')
-
 
 @app.route("/games")
 def games():

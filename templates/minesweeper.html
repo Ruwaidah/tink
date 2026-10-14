@@ -16,19 +16,16 @@
         <h1>Minesweeper</h1>
         <p>Game coming together..</p>
         <div class="minesweeper-board" style="--cols: {{ cols }}; --rows: {{ rows }};">
-            {% for row in board %}
-            {% for col in row %}
-            <button class="cell" data-row="{{ row }}" data-col="{{ col }}" type="button">
-                {% if col == -1 %}
-                💣
-                {% elif col > 0 %}
-                {{col}}
-                {% endif %}
+            {% for row in range(rows) %}
+            {% for col in range(cols) %}
+            <button class="cell" data-row="{{ row }}" data-col="{{ col }}" data-value="{{ board[row][col] }}"
+                type="button">
             </button>
             {% endfor %}
             {% endfor %}
         </div>
     </main>
+    <script src="{{ url_for('static', filename='js/minesweeper.js') }}"></script>
 </body>
 
 </html>
