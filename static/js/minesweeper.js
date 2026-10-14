@@ -63,5 +63,30 @@ cells.forEach(cell => {
     cell.addEventListener('click', () => {
         revealCell(cell);
     });
-});
+
+})
+
+cells.forEach(cell => {
+    cell.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        console.log('right click');
+
+        if (gameOver) {
+            return;
+        }
+
+        if (cell.classList.contains('revealed')) {
+            return;
+        }
+
+        cell.classList.toggle('flagged');
+
+        if (cell.classList.contains('flagged')) {
+            cell.textContent = '🚩';
+        } else {
+            cell.textContent = '';
+        }
+
+    });
+})
 
