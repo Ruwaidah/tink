@@ -30,3 +30,7 @@
     border: 1px solid #808080;
     cursor: default;
 }
+
+.cell.mine-hit {
+    background-color: #ff2828;
+}

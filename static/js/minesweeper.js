@@ -4,8 +4,13 @@ const cells = document.querySelectorAll('.cell');
 const rows = Number(board.dataset.rows);
 const cols = Number(board.dataset.cols);
 
+let gameOver = false;
+
 
 function revealCell(cell) {
+    if (gameOver) {
+        return;
+    }
     if (cell.classList.contains('revealed')) {
         return;
     }
@@ -18,6 +23,9 @@ function revealCell(cell) {
 
     if (value === -1) {
         cell.textContent = '💣';
+        cell.classList.add('mine-hit');
+        revealAllMines();
+        gameOver = true;
         return;
     }
     if (value > 0) {
@@ -39,6 +47,16 @@ function revealNeighbors(row, col) {
             }
         }
     }
+}
+
+function revealAllMines() {
+    cells.forEach(cell => {
+        const value = Number(cell.dataset.value);
+        if (value === -1) {
+            cell.classList.add('revealed');
+            cell.textContent = '💣';
+        }
+    });
 }
 
 cells.forEach(cell => {
