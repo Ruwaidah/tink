@@ -48,7 +48,9 @@ def minesweeper():
 
     return render_template('minesweeper.html',
                            board=board,
-                           rows=rows, cols=cols)
+                           rows=rows, 
+                           cols=cols,
+                           mine_count=mine_count)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
