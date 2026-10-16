@@ -15,15 +15,17 @@
     <main class="home-container">
         <h1>Minesweeper</h1>
         <p>Game coming together..</p>
+        <div class="minesweeper-info">
+            <p>Mine left: <span id="mine-count">{{ mine_count }}</span></p>
+        </div>
         <div class="minesweeper-board" style="--cols: {{ cols }}; --rows: {{ rows }};" data-rows="{{ rows }}"
-            data-cols="{{ cols }}">
+            data-cols="{{ cols }}" data-mines=" {{ mine_count }}">
             {% for row in range(rows) %}
             {% for col in range(cols) %}
             <button class="cell" data-row="{{ row }}" data-col="{{ col }}" data-value="{{ board[row][col] }}"
-                type="button"
-            </button>
-            {% endfor %}
-            {% endfor %}
+                type="button" </button>
+                {% endfor %}
+                {% endfor %}
         </div>
     </main>
     <script src="{{ url_for('static', filename='js/minesweeper.js') }}"></script>

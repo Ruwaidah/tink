@@ -6,7 +6,6 @@ const cols = Number(board.dataset.cols);
 
 let gameOver = false;
 
-
 function revealCell(cell) {
     if (gameOver) {
         return;
