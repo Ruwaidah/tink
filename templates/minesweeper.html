@@ -5,31 +5,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/minesweeper.css') }}">
+
     <title>Minesweeper | Tink</title>
 </head>
 
 <body>
-    <main class="home-container">
+
+    <main class="minesweeper-container">
+
         <h1>Minesweeper</h1>
-        <p>Game coming together..</p>
-        <p id="game-status">Game in progress</p>
-        <div class="minesweeper-info">
-            <p>Mine left: <span id="mine-count">{{ mine_count }}</span></p>
+
+        <div class="minesweeper-controls">
+            <button id="reset-button" type="button">
+                🙂
+            </button>
         </div>
+
+        <p id="game-status">
+            Game in progress
+        </p>
+
+        <div class="minesweeper-info">
+            <p>
+                Flags left:
+                <span id="flags-left">{{ mine_count }}</span>
+            </p>
+        </div>
+
         <div class="minesweeper-board" style="--cols: {{ cols }}; --rows: {{ rows }};" data-rows="{{ rows }}"
-            data-cols="{{ cols }}" data-mines=" {{ mine_count }}">
+            data-cols="{{ cols }}" data-mines="{{ mine_count }}">
+
             {% for row in range(rows) %}
             {% for col in range(cols) %}
+
             <button class="cell" data-row="{{ row }}" data-col="{{ col }}" data-value="{{ board[row][col] }}"
-                type="button" </button>
-                {% endfor %}
-                {% endfor %}
+                type="button"></button>
+
+            {% endfor %}
+            {% endfor %}
+
         </div>
+
     </main>
+
     <script src="{{ url_for('static', filename='js/minesweeper.js') }}"></script>
+
 </body>
 
 </html>

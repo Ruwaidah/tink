@@ -4,8 +4,9 @@ const cells = document.querySelectorAll('.cell');
 const rows = Number(board.dataset.rows);
 const cols = Number(board.dataset.cols);
 
-const mineCount = document.querySelector('#mine-count');
+const mineCount = document.querySelector('#flags-left');
 const gameStatus = document.querySelector('#game-status');
+const resetButton = document.querySelector('#reset-button');
 
 let gameOver = false;
 
@@ -116,5 +117,16 @@ cells.forEach(cell => {
         }
 
     });
+})
+
+resetButton.addEventListener('click', () => {
+    cells.forEach(cell => {
+        cell.classList.remove('revealed', 'flagged', 'mine-hit');
+        cell.textContent = '';
+    });
+    mineCount.textContent = Number(board.dataset.mines);
+    safeCellsLeft = rows * cols - Number(mineCount.textContent);
+    gameOver = false;
+    gameStatus.textContent = 'Game in progress';
 })
 
