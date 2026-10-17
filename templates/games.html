@@ -10,15 +10,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/games.css') }}">
     <title>Tink Games</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-
+</head>
 <body>
     <main class="home-container">
         <h1>Games</h1>
         <p>Choose a game to play.</p>
         <div class="home-actions">
-            <a href="{{ url_for('minesweeper') }}">
-                Minesweeper</a>
+            <a href="{{ url_for('minesweeper.minesweeper') }}">
+                Minesweeper
+            </a>
         </div>
     </main>
 </body>

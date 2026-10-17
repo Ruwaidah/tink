@@ -37,7 +37,9 @@
         </div>
 
         <div class="minesweeper-board" style="--cols: {{ cols }}; --rows: {{ rows }};" data-rows="{{ rows }}"
-            data-cols="{{ cols }}" data-mines="{{ mine_count }}">
+            data-cols="{{ cols }}" 
+            data-mines="{{ mine_count }}" 
+            data-new-game-url="{{ url_for('minesweeper.new_board') }}">
 
             {% for row in range(rows) %}
             {% for col in range(cols) %}

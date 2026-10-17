@@ -1,7 +1,9 @@
 from flask import Flask, render_template
-from games.minesweeper import create_board
+from routes.minesweeper_routes import minesweeper_bp    
 
 app = Flask(__name__)
+
+app.register_blueprint(minesweeper_bp)
 
 @app.route('/')
 def home():
@@ -10,19 +12,6 @@ def home():
 @app.route("/games")
 def games():
     return render_template('games.html')
-
-@app.route("/games/minesweeper")
-def minesweeper():
-    rows = 9
-    cols = 9
-    mine_count = 10
-    board = create_board(rows, cols, mine_count)
-
-    return render_template('minesweeper.html',
-                           board=board,
-                           rows=rows, 
-                           cols=cols,
-                           mine_count=mine_count)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

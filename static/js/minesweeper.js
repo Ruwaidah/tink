@@ -3,14 +3,15 @@ const cells = document.querySelectorAll('.cell');
 
 const rows = Number(board.dataset.rows);
 const cols = Number(board.dataset.cols);
+const newGameUrl = board.dataset.newGameUrl;
 
-const mineCount = document.querySelector('#flags-left');
+const flagLeft = document.querySelector('#flags-left');
 const gameStatus = document.querySelector('#game-status');
 const resetButton = document.querySelector('#reset-button');
 
 let gameOver = false;
 
-let safeCellsLeft = rows * cols - Number(mineCount.textContent);
+let safeCellsLeft = rows * cols - Number(flagLeft.textContent);
 
 function revealCell(cell) {
     if (gameOver) {
@@ -93,7 +94,6 @@ cells.forEach(cell => {
 cells.forEach(cell => {
     cell.addEventListener('contextmenu', (e) => {
         e.preventDefault();
-        console.log('right click', mineCount.textContent - 1);
 
         if (gameOver) {
             return;
@@ -103,29 +103,35 @@ cells.forEach(cell => {
             return;
         }
 
-        if (Number(mineCount.textContent) <= 0 && !cell.classList.contains('flagged')) {
+        if (Number(flagLeft.textContent) <= 0 && !cell.classList.contains('flagged')) {
             return;
         }
         cell.classList.toggle('flagged');
 
         if (cell.classList.contains('flagged')) {
             cell.textContent = '🚩';
-            mineCount.textContent = Number(mineCount.textContent) - 1;
+            flagLeft.textContent = Number(flagLeft.textContent) - 1;
         } else {
             cell.textContent = '';
-            mineCount.textContent = Number(mineCount.textContent) + 1;
+            flagLeft.textContent = Number(flagLeft.textContent) + 1;
         }
 
     });
 })
 
-resetButton.addEventListener('click', () => {
+resetButton.addEventListener('click', async () => {
+    const response = await fetch(newGameUrl, ({ method: 'GET' }))
+    const data = await response.json();
     cells.forEach(cell => {
+        const row = Number(cell.dataset.row);
+        const col = Number(cell.dataset.col);
+        cell.dataset.value = data.board[row][col];
         cell.classList.remove('revealed', 'flagged', 'mine-hit');
         cell.textContent = '';
     });
-    mineCount.textContent = Number(board.dataset.mines);
-    safeCellsLeft = rows * cols - Number(mineCount.textContent);
+
+    flagLeft.textContent = Number(data.mine_count);
+    safeCellsLeft = data.rows * data.cols - Number(data.mine_count);
     gameOver = false;
     gameStatus.textContent = 'Game in progress';
 })

@@ -1,6 +1,5 @@
 import random
 
-
 def create_board(rows, cols, mine_count):
     # Create an empty board
     board = [[0 for _ in range(cols)] for _ in range(rows)]
