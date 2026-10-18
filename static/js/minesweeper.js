@@ -10,10 +10,24 @@ const gameStatus = document.querySelector('#game-status');
 const resetButton = document.querySelector('#reset-button');
 
 let gameOver = false;
+let firstClick = true;
 
 let safeCellsLeft = rows * cols - Number(flagLeft.textContent);
 
-function revealCell(cell) {
+async function revealCell(cell) {
+    if (firstClick && Number(cell.dataset.value) === -1) {
+        firstClick = false;
+        const response = await fetch(`${newGameUrl}?safe_first_click_row=${cell.dataset.row}&safe_first_click_col=${cell.dataset.col}&firstClick=true`, {
+            method: 'GET'
+        });
+        const data = await response.json();
+        cells.forEach(cell => {
+            const row = Number(cell.dataset.row);
+            const col = Number(cell.dataset.col);
+            cell.dataset.value = data.board[row][col];
+        });
+    }
+    firstClick = false;
     if (gameOver) {
         return;
     }
@@ -43,7 +57,6 @@ function revealCell(cell) {
 
     if (value > 0) {
         cell.textContent = value;
-        console.log('safeCellsLeft', safeCellsLeft);
         if (safeCellsLeft === 0) {
             gameOver = true;
             gameStatus.textContent = 'You win! 🎉';
@@ -53,7 +66,6 @@ function revealCell(cell) {
 
     revealNeighbors(row, col);
 
-    console.log('safeCellsLeft', safeCellsLeft);
     if (safeCellsLeft === 0) {
         gameOver = true;
         gameStatus.textContent = 'You win! 🎉';
@@ -129,7 +141,7 @@ resetButton.addEventListener('click', async () => {
         cell.classList.remove('revealed', 'flagged', 'mine-hit');
         cell.textContent = '';
     });
-
+    firstClick = true;
     flagLeft.textContent = Number(data.mine_count);
     safeCellsLeft = data.rows * data.cols - Number(data.mine_count);
     gameOver = false;
