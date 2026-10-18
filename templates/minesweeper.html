@@ -34,11 +34,19 @@
                 Flags left:
                 <span id="flags-left">{{ mine_count }}</span>
             </p>
+            <p>Time: <span id="time" data-time="{{ time }}">{{ time }}</span></p>
+        </div>
+        <div>
+            <label for="difficulty">Difficulty:</label>
+            <select id="difficulty" name="difficulty" data-new-game-url="{{ url_for('minesweeper.new_board') }}">
+                <option value="easy" {% if difficulty=='easy' %}selected{% endif %}>Easy</option>
+                <option value="medium" {% if difficulty=='medium' %}selected{% endif %}>Medium</option>
+                <option value="hard" {% if difficulty=='hard' %}selected{% endif %}>Hard</option>
+            </select>
         </div>
 
         <div class="minesweeper-board" style="--cols: {{ cols }}; --rows: {{ rows }};" data-rows="{{ rows }}"
-            data-cols="{{ cols }}" 
-            data-mines="{{ mine_count }}" 
+            data-cols="{{ cols }}" data-mines="{{ mine_count }}"
             data-new-game-url="{{ url_for('minesweeper.new_board') }}">
 
             {% for row in range(rows) %}
