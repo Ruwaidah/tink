@@ -10,6 +10,7 @@ const gameStatus = document.querySelector('#game-status');
 const resetButton = document.querySelector('#reset-button');
 const timeDisplay = document.querySelector('#time');
 const difficultySelect = document.querySelector('#difficulty');
+const scoreDisplay = document.querySelector("#score")
 let initialTime = Number(timeDisplay.dataset.time);
 
 
@@ -75,6 +76,7 @@ async function revealCell(cell) {
         cell.textContent = value;
         if (safeCellsLeft === 0) {
             gameOver = true;
+            scoreDisplay.textContent = Number(timeDisplay.textContent)
             gameStatus.textContent = 'You win! 🎉';
         }
         return;
@@ -84,6 +86,7 @@ async function revealCell(cell) {
 
     if (safeCellsLeft === 0) {
         gameOver = true;
+        scoreDisplay.textContent = Number(timeDisplay.textContent)
         gameStatus.textContent = 'You win! 🎉';
     }
 }
@@ -216,6 +219,13 @@ difficultySelect.addEventListener('change', async () => {
 function buildBoard(boardData) {
     rows = boardData.rows;
     cols = boardData.cols;
+
+    firstClick = true;
+    gameOver = false;
+
+    scoreDisplay.textContent = 0;
+
+    gameStatus.textContent = 'Game in progress';
 
     board.innerHTML = '';
 
