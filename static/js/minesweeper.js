@@ -20,6 +20,9 @@ let firstClick = true;
 let safeCellsLeft = rows * cols - Number(flagLeft.textContent);
 
 async function revealCell(cell) {
+    if (timer === null) {
+        startTimer();
+    }
     if (gameOver) {
         return;
     }
@@ -192,7 +195,6 @@ function startTimer() {
             if (Number(timeDisplay.textContent) <= 0) {
                 clearInterval(timer);
                 timer = null;
-
                 gameOver = true;
                 gameStatus.textContent = "Time's up! Game Over";
             }
