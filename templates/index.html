@@ -16,10 +16,17 @@
         <h1>Tink</h1>
         <p>Little games. Lots of fun.</p>
         <div class="home-actions">
-            <button>Login</button>
-            <button href="{{ url_for('register')}}">Create Account</button>
+            {% if session.get('username') %}
+            <p>Welcome, {{ session.get('username') }}</p>
+            <a href="{{ url_for('auth.logout')}}">Logout</a>
+
+            {% else %}
+            <a href="{{ url_for('auth.login')}}">Login</a>
+            <a href="{{ url_for('auth.register')}}">Create Account</a>
             <a href="{{ url_for('games') }}">
                 Play as Guest</a>
+
+            {% endif %}
         </div>
     </main>
 </body>

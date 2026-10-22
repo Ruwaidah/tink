@@ -21,6 +21,8 @@ def register():
                 error='All fields are required'
             )
 
+        print(password, confirm_password)
+
         if password != confirm_password:
             return render_template(
                 'register.html',
@@ -86,4 +88,12 @@ def login():
         session['user_id'] = user.id
         session['username'] = user.username
 
+        return redirect(url_for('home'))
+
     return render_template('login.html')
+
+
+@auth_bp.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('home'))
