@@ -1,5 +1,6 @@
 from extensions import db
 from models.user import User
+from models.score import Score
 from flask import Flask, render_template
 from routes.minesweeper_routes import minesweeper_bp 
 from routes.auth_routes import auth_bp   
