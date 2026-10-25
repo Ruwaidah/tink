@@ -35,20 +35,21 @@
                 <span id="flags-left">{{ mine_count }}</span>
             </p>
             <p>Time: <span id="time" data-time="{{ time }}">{{ time }}</span></p>
-            <p >Score: <span id="score">0</span></p>
+            <p>Score: <span id="score">0</span></p>
         </div>
         <div>
             <label for="difficulty">Difficulty:</label>
             <select id="difficulty" name="difficulty" data-new-game-url="{{ url_for('minesweeper.new_board') }}">
-                <option value="easy" {% if difficulty=='easy' %}selected{% endif %}>Easy</option>
-                <option value="medium" {% if difficulty=='medium' %}selected{% endif %}>Medium</option>
-                <option value="hard" {% if difficulty=='hard' %}selected{% endif %}>Hard</option>
+                <option value="easy" {% if difficulty == 'easy' %}selected{% endif %}>Easy</option>
+                <option value="medium" {% if difficulty == 'medium' %}selected{% endif %}>Medium</option>
+                <option value="hard" {% if difficulty == 'hard' %}selected{% endif %}>Hard</option>
             </select>
         </div>
 
         <div class="minesweeper-board" style="--cols: {{ cols }}; --rows: {{ rows }};" data-rows="{{ rows }}"
-            data-cols="{{ cols }}" data-mines="{{ mine_count }}"
-            data-new-game-url="{{ url_for('minesweeper.new_board') }}">
+            data-score-url="{{ url_for('score.save_score') }}"
+            data-logged-in="{{ 'true' if session.get('user_id') else 'false' }}" data-cols="{{ cols }}"
+            data-mines="{{ mine_count }}" data-new-game-url="{{ url_for('minesweeper.new_board') }}">
 
             {% for row in range(rows) %}
             {% for col in range(cols) %}

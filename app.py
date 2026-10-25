@@ -3,7 +3,8 @@ from models.user import User
 from models.score import Score
 from flask import Flask, render_template
 from routes.minesweeper_routes import minesweeper_bp 
-from routes.auth_routes import auth_bp   
+from routes.auth_routes import auth_bp
+from routes.score_routes import score_bp
 
 app = Flask(__name__)
 
@@ -17,6 +18,7 @@ with app.app_context():
 
 app.register_blueprint(minesweeper_bp)
 app.register_blueprint(auth_bp)
+app.register_blueprint(score_bp)
 
 @app.route('/')
 def home():

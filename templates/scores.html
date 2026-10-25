@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+
+    <title>My Scores | Tink</title>
+</head>
+
+<body>
+
+    <main>
+        <h2>Best Scores</h2>
+
+        <p>
+            Easy:
+            {% if best_scores.easy is not none %}
+            {{ best_scores.easy }}
+            {% else %}
+            No score yet
+            {% endif %}
+        </p>
+
+        <p>
+            Medium:
+            {% if best_scores.medium is not none %}
+            {{ best_scores.medium }}
+            {% else %}
+            No score yet
+            {% endif %}
+        </p>
+
+        <p>
+            Hard:
+            {% if best_scores.hard is not none %}
+            {{ best_scores.hard }}
+            {% else %}
+            No score yet
+            {% endif %}
+        </p>
+
+
+
+
+        <h2>Score History</h2>
+
+        {% if scores %}
+
+        {% for score in scores %}
+
+        <p>
+            {{ score.difficulty }}
+            -
+            {{ score.score }}
+        </p>
+
+        {% endfor %}
+
+        {% else %}
+
+        <p>
+            You don't have any saved scores yet.
+        </p>
+
+        {% endif %}
+
+        {% endif %}
+
+        <a href="{{ url_for('games') }}">
+            Back to Games
+        </a>
+
+    </main>
+
+</body>
+
+</html>

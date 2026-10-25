@@ -13,6 +13,9 @@ const difficultySelect = document.querySelector('#difficulty');
 const scoreDisplay = document.querySelector("#score")
 let initialTime = Number(timeDisplay.dataset.time);
 
+const scoreUrl = board.dataset.scoreUrl;
+const loggedIn = board.dataset.loggedIn === 'true';
+
 
 let gameOver = false;
 let firstClick = true;
@@ -78,9 +81,7 @@ async function revealCell(cell) {
     if (value > 0) {
         cell.textContent = value;
         if (safeCellsLeft === 0) {
-            gameOver = true;
-            scoreDisplay.textContent = Number(timeDisplay.textContent)
-            gameStatus.textContent = 'You win! 🎉';
+            handleWin();
         }
         return;
     }
@@ -88,9 +89,7 @@ async function revealCell(cell) {
     revealNeighbors(row, col);
 
     if (safeCellsLeft === 0) {
-        gameOver = true;
-        scoreDisplay.textContent = Number(timeDisplay.textContent)
-        gameStatus.textContent = 'You win! 🎉';
+        handleWin();
     }
 }
 
@@ -269,4 +268,53 @@ function buildBoard(boardData) {
     gameStatus.textContent = 'Game in progress';
 
     cellEventClick();
+}
+
+
+async function saveScore(score) {
+    if (!loggedIn) {
+        return;
+    }
+
+    const response = await fetch(scoreUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            difficulty: difficultySelect.value,
+            score: score
+        })
+    })
+
+    const data = await response.json();
+
+    console.log(data);
+
+}
+
+function calculateScore() {
+    const timeLeft = Number(timeDisplay.textContent);
+    const difficulty = difficultySelect.value;
+
+    let multiplier = 1;
+
+    if (difficulty === 'medium') {
+        multiplier = 2;
+    } else if (difficulty === 'hard') {
+        multiplier = 3;
+    }
+
+    return timeLeft * multiplier;
+}
+
+async function handleWin() {
+    gameOver = true;
+
+    const score = calculateScore();
+
+    scoreDisplay.textContent = score;
+    gameStatus.textContent = 'You win! 🎉';
+
+    await saveScore(score);
 }
