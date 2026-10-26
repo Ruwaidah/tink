@@ -309,6 +309,10 @@ function calculateScore() {
 }
 
 async function handleWin() {
+    if (gameOver) {
+        return;
+    }
+
     gameOver = true;
 
     const score = calculateScore();
