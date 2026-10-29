@@ -273,6 +273,7 @@ function buildBoard(boardData) {
 
 async function saveScore(score) {
     if (!loggedIn) {
+        scoreMessage.textContent = 'Log in to save your score.';
         return;
     }
 
@@ -285,12 +286,15 @@ async function saveScore(score) {
             difficulty: difficultySelect.value,
             score: score
         })
-    })
+    });
 
     const data = await response.json();
 
-    console.log(data);
-
+    if (response.ok) {
+        scoreMessage.textContent = 'Score saved!';
+    } else {
+        scoreMessage.textContent = data.error;
+    }
 }
 
 function calculateScore() {

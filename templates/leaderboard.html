@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+
+    <title>Leaderboard | Tink</title>
+</head>
+
+<body>
+
+    <main>
+        <h1>Leaderboard</h1>
+
+        <h2>Easy</h2>
+
+        {% for score, user in easy_scores %}
+        <p>
+            {{ loop.index }}.
+            {{ user.username }}
+            -
+            {{ score.score }}
+        </p>
+        {% else %}
+        <p>No scores yet.</p>
+        {% endfor %}
+
+
+        <h2>Medium</h2>
+
+        {% for score, user in medium_scores %}
+        <p>
+            {{ loop.index }}.
+            {{ user.username }}
+            -
+            {{ score.score }}
+        </p>
+        {% else %}
+        <p>No scores yet.</p>
+        {% endfor %}
+
+
+        <h2>Hard</h2>
+
+        {% for score, user in hard_scores %}
+        <p>
+            {{ loop.index }}.
+            {{ user.username }}
+            -
+            {{ score.score }}
+        </p>
+        {% else %}
+        <p>No scores yet.</p>
+        {% endfor %}
+
+        <a href="{{ url_for('home') }}">
+            Home
+        </a>
+    </main>
+
+</body>
+
+</html>

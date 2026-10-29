@@ -1,5 +1,6 @@
 from flask import (Blueprint, render_template, request, session, redirect, url_for)
 from werkzeug.security import (generate_password_hash, check_password_hash)
+from models.score import Score
 
 from extensions import db
 from models.user import User
@@ -91,6 +92,49 @@ def login():
         return redirect(url_for('home'))
 
     return render_template('login.html')
+
+
+@auth_bp.route('/profile')
+def profile():
+    if 'user_id' not in session:
+        return redirect(url_for('auth.login'))
+
+    user = User.query.get(session['user_id'])
+
+    user_scores = Score.query.filter_by(
+        user_id=session['user_id']
+    ).all()
+
+    easy_scores = [
+        score.score
+        for score in user_scores
+        if score.difficulty == 'easy'
+    ]
+
+    medium_scores = [
+        score.score
+        for score in user_scores
+        if score.difficulty == 'medium'
+    ]
+
+    hard_scores = [
+        score.score
+        for score in user_scores
+        if score.difficulty == 'hard'
+    ]
+
+    best_scores = {
+        'easy': max(easy_scores) if easy_scores else None,
+        'medium': max(medium_scores) if medium_scores else None,
+        'hard': max(hard_scores) if hard_scores else None
+    }
+
+    return render_template(
+        'profile.html',
+        user=user,
+        total_games=len(user_scores),
+        best_scores=best_scores
+    )
 
 
 @auth_bp.route('/logout')

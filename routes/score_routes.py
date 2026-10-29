@@ -7,7 +7,7 @@ from flask import (
     redirect,
     url_for
 )
-
+from models.user import User
 from extensions import db
 from models.score import Score
 
@@ -93,4 +93,40 @@ def scores():
         'scores.html',
         scores=user_scores,
         best_scores=best_scores
+    )
+
+@score_bp.route('/leaderboard')
+def leaderboard():
+    easy_scores = (
+        db.session.query(Score, User)
+        .join(User, Score.user_id == User.id)
+        .filter(Score.difficulty == 'easy')
+        .order_by(Score.score.desc())
+        .limit(10)
+        .all()
+    )
+
+    medium_scores = (
+        db.session.query(Score, User)
+        .join(User, Score.user_id == User.id)
+        .filter(Score.difficulty == 'medium')
+        .order_by(Score.score.desc())
+        .limit(10)
+        .all()
+    )
+
+    hard_scores = (
+        db.session.query(Score, User)
+        .join(User, Score.user_id == User.id)
+        .filter(Score.difficulty == 'hard')
+        .order_by(Score.score.desc())
+        .limit(10)
+        .all()
+    )
+
+    return render_template(
+        'leaderboard.html',
+        easy_scores=easy_scores,
+        medium_scores=medium_scores,
+        hard_scores=hard_scores
     )
