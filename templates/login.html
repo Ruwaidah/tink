@@ -1,44 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
+{% block title %}
+Login | Tink
+{% endblock %}
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
+<main>
+    <h1>Login</h1>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    {% if error %}
+    <p>{{ error }}</p>
+    {% endif %}
 
-    <title>Login | Tink</title>
-</head>
+    <form method="POST">
 
-<body>
-    <main>
-        <h1>Login</h1>
+        <label for="email">
+            Email
+        </label>
 
-        {% if error %}
-        <p>{{ error }}</p>
-        {% endif %}
+        <input id="email" name="email" type="email" required>
 
-        <form method="POST">
+        <label for="password">
+            Password
+        </label>
 
-            <label for="email">
-                Email
-            </label>
+        <input id="password" name="password" type="password" required>
 
-            <input id="email" name="email" type="email" required>
-
-            <label for="password">
-                Password
-            </label>
-
-            <input id="password" name="password" type="password" required>
-
-            <button type="submit">
-                Login
-            </button>
-            <a href="{{url_for('home')}}">Cancel</a>
-        </form>
-    </main>
-</body>
-
-</html>
+        <button type="submit">
+            Login
+        </button>
+        <a href="{{url_for('home')}}">Cancel</a>
+    </form>
+</main>
+{% endblock %}

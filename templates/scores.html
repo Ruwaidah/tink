@@ -1,65 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block title %}
+My Scores | Tink
+{% endblock %}
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+{% block content %}
 
-    <title>Profile | Tink</title>
-</head>
+<main>
 
-<body>
+    <h1>My Scores</h1>
 
-    <main>
+    <h2>Best Scores</h2>
 
-        <h1>{{ user.username }}'s Profile</h1>
+    <p>
+        Easy:
+        {% if best_scores.easy is not none %}
+        {{ best_scores.easy }}
+        {% else %}
+        No score yet
+        {% endif %}
+    </p>
 
-        <p>
-            Total saved games:
-            {{ total_games }}
-        </p>
+    <p>
+        Medium:
+        {% if best_scores.medium is not none %}
+        {{ best_scores.medium }}
+        {% else %}
+        No score yet
+        {% endif %}
+    </p>
 
-        <h2>Best Scores</h2>
+    <p>
+        Hard:
+        {% if best_scores.hard is not none %}
+        {{ best_scores.hard }}
+        {% else %}
+        No score yet
+        {% endif %}
+    </p>
 
-        <p>
-            Easy:
-            {% if best_scores.easy is not none %}
-            {{ best_scores.easy }}
-            {% else %}
-            No score yet
-            {% endif %}
-        </p>
+    <h2>Score History</h2>
 
-        <p>
-            Medium:
-            {% if best_scores.medium is not none %}
-            {{ best_scores.medium }}
-            {% else %}
-            No score yet
-            {% endif %}
-        </p>
+    {% if scores %}
 
-        <p>
-            Hard:
-            {% if best_scores.hard is not none %}
-            {{ best_scores.hard }}
-            {% else %}
-            No score yet
-            {% endif %}
-        </p>
+    {% for score in scores %}
+    <p>
+        {{ score.difficulty }}
+        -
+        {{ score.score }}
+    </p>
+    {% endfor %}
 
-        <a href="{{ url_for('home') }}">
-            Home
-        </a>
+    {% else %}
 
-        <a href="{{ url_for('games') }}">
-            Play Games
-        </a>
+    <p>No saved scores yet.</p>
 
-    </main>
+    {% endif %}
 
-</body>
+    <a href="{{ url_for('games') }}">
+        Back to Games
+    </a>
 
-</html>
+</main>
+
+{% endblock %}

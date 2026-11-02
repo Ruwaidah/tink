@@ -1,26 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+{% block title %}
+Games | Tink
+{% endblock %}
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/games.css') }}">
-    <title>Tink Games</title>
+{% block content %}
 
-</head>
-<body>
-    <main class="home-container">
-        <h1>Games</h1>
-        <p>Choose a game to play.</p>
-        <div class="home-actions">
-            <a href="{{ url_for('minesweeper.minesweeper') }}">
-                Minesweeper
-            </a>
-        </div>
-    </main>
-</body>
+<main>
 
-</html>
+    <h1>Games</h1>
+
+    <a href="{{ url_for('minesweeper.minesweeper') }}">
+        Minesweeper
+    </a>
+
+    <a href="{{ url_for('score.leaderboard') }}">
+        Leaderboard
+    </a>
+
+    <a href="{{ url_for('home') }}">
+        Home
+    </a>
+
+</main>
+
+{% endblock %}
