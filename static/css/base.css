@@ -1,27 +1,262 @@
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
+ /* Custom Font Assignments */
+ .font-hand {
+     font-family: 'Patrick Hand', cursive;
+ }
 
-.main-nav {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 16px 24px;
-    background-color: #222;
-}
+ .font-title {
+     font-family: 'Caveat', cursive;
+ }
 
-.main-nav a {
-    color: white;
-    text-decoration: none;
-}
+ .font-sketch {
+     font-family: 'Architects Daughter', cursive;
+ }
 
-.main-nav span {
-    margin-left: auto;
-    color: white;
-}
+ .font-stack {
+     font-family: 'Short Stack', cursive;
+ }
 
-.tagline {
-    margin-top: 8px;
-    font-size: 18px;
-}
+ /* Wobbly Sketch Border Filter */
+ .hand-drawn-border {
+     filter: url(#rough-paper);
+ }
+
+ /* Organic Hand-Drawn Radius Variations */
+ .sketch-box {
+     border: 2px solid currentColor;
+     border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+ }
+
+ .sketch-box-alt {
+     border: 2px solid currentColor;
+     border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
+ }
+
+ /* Blueprint Mode (Dark Blue Grid) */
+ body.blueprint-mode {
+     background-color: #1e3a8a;
+     background-image:
+         linear-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px),
+         linear-gradient(90deg, rgba(255, 255, 255, 0.18) 1px, transparent 1px),
+         linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+         linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+     background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+     color: #f8fafc;
+ }
+
+ /* Paper Sketch Mode (Warm Off-White Grid) */
+ body.paper-mode {
+     background-color: #faf7f2;
+     background-image:
+         linear-gradient(rgba(148, 163, 184, 0.25) 1px, transparent 1px),
+         linear-gradient(90deg, rgba(148, 163, 184, 0.25) 1px, transparent 1px);
+     background-size: 24px 24px;
+     color: #1e293b;
+ }
+
+ /* Sticky Tape Accent Effect */
+ .tape-top-left {
+     position: relative;
+ }
+
+ .tape-top-left::before {
+     content: '';
+     position: absolute;
+     top: -12px;
+     left: 15%;
+     transform: rotate(-4deg);
+     width: 70px;
+     height: 22px;
+     background-color: rgba(254, 240, 138, 0.65);
+     border: 1px dashed rgba(202, 138, 4, 0.4);
+     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+     z-index: 20;
+ }
+
+ .tape-top-right {
+     position: relative;
+ }
+
+ .tape-top-right::before {
+     content: '';
+     position: absolute;
+     top: -10px;
+     right: 15%;
+     transform: rotate(3deg);
+     width: 70px;
+     height: 22px;
+     background-color: rgba(254, 240, 138, 0.65);
+     border: 1px dashed rgba(202, 138, 4, 0.4);
+     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+     z-index: 20;
+ }
+
+ body.blueprint-mode .tape-top-left::before,
+ body.blueprint-mode .tape-top-right::before {
+     background-color: rgba(255, 255, 255, 0.22);
+     border-color: rgba(255, 255, 255, 0.35);
+ }
+
+ /* Animated Mascot Gear Rotation */
+ @keyframes gear-idle {
+     0% {
+         transform: rotate(0deg);
+     }
+
+     100% {
+         transform: rotate(360deg);
+     }
+ }
+
+ .gear-idle-spin {
+     animation: gear-idle 16s linear infinite;
+ }
+
+ /* Interactive Card Hover Transforms */
+ .game-card {
+     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+ }
+
+ .game-card:hover {
+     transform: translateY(-8px) rotate(1deg) scale(1.02);
+ }
+
+ /* Pulse for Lit Lightbulb */
+ @keyframes bulb-glow {
+
+     0%,
+     100% {
+         filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.9));
+     }
+
+     50% {
+         filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.4));
+     }
+ }
+
+ .bulb-lit {
+     animation: bulb-glow 2s infinite ease-in-out;
+ }
+
+ /* Custom Scrollbar */
+ ::-webkit-scrollbar {
+     width: 8px;
+ }
+
+ ::-webkit-scrollbar-track {
+     background: rgba(0, 0, 0, 0.05);
+ }
+
+ ::-webkit-scrollbar-thumb {
+     background: rgba(148, 163, 184, 0.5);
+     border-radius: 4px;
+ }
+
+ /* =========================================
+   WORKSHOP TOOLBAR (Top Header Bar)
+   ========================================= */
+
+ .workshop-toolbar {
+     width: 100%;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 16px 24px;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     border-bottom: 2px dashed rgba(226, 241, 255, 0.25);
+     background: rgba(13, 22, 32, 0.4);
+     backdrop-filter: blur(4px);
+     position: relative;
+     z-index: 100;
+ }
+
+ /* Toolbar Logo Style */
+ .toolbar-logo {
+     font-family: 'Architects Daughter', cursive;
+     font-size: 1.4rem;
+     color: var(--ms-accent-blue, #40c4ff);
+     text-decoration: none;
+     display: flex;
+     align-items: center;
+     gap: 6px;
+     padding-right: 10px;
+     border-right: 2px dashed rgba(226, 241, 255, 0.25);
+     margin-right: 4px;
+     font-weight: bold;
+ }
+
+ .toolbar-logo:hover {
+     color: #fff;
+     text-shadow: 0 0 8px rgba(64, 196, 255, 0.6);
+ }
+
+ /* Tool Groups */
+ .tool-group,
+ .spec-group {
+     display: flex;
+     align-items: center;
+     gap: 14px;
+ }
+
+ /* Blueprint Tool Buttons (Paper Grid & Sound) */
+ .blueprint-tool-btn {
+     font-family: 'Patrick Hand', cursive;
+     background: #1e3042;
+     color: var(--ms-sketch-ink, #e2f1ff);
+     border: 2px solid var(--ms-sketch-ink, #e2f1ff);
+     padding: 6px 14px;
+     font-size: 1rem;
+     border-radius: 8px;
+     cursor: pointer;
+     display: flex;
+     align-items: center;
+     gap: 6px;
+     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+     transition: all 0.2s ease;
+ }
+
+ .blueprint-tool-btn:hover {
+     background: #294258;
+     transform: translateY(-2px);
+     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+ }
+
+ .blueprint-tool-btn:active {
+     transform: translateY(0);
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+ }
+
+ /* Blueprint Spec Tag (Looks like stamped engineering text) */
+ .blueprint-spec-tag {
+     font-family: 'Architects Daughter', cursive;
+     font-size: 0.95rem;
+     color: rgba(226, 241, 255, 0.65);
+     letter-spacing: 1.5px;
+     text-transform: uppercase;
+     border: 1px dashed rgba(226, 241, 255, 0.3);
+     padding: 4px 10px;
+     border-radius: 4px;
+     background: rgba(10, 16, 22, 0.5);
+ }
+
+ /* Tinks Badge (Looks like a brass workshop token) */
+ .tinks-badge {
+     font-family: 'Patrick Hand', cursive;
+     font-size: 1.1rem;
+     font-weight: bold;
+     background: linear-gradient(135deg, #ffd740 0%, #ffc107 100%);
+     color: #16222d;
+     padding: 5px 14px;
+     border-radius: 20px;
+     border: 2px solid #ffe082;
+     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+     display: flex;
+     align-items: center;
+     gap: 4px;
+     cursor: pointer;
+     transition: transform 0.2s ease;
+ }
+
+ .tinks-badge:hover {
+     transform: scale(1.05) rotate(1deg);
+ }

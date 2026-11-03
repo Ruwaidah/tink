@@ -1,80 +1,686 @@
-.minesweeper-container {
-    min-height: 100vh;
+/* =========================================
+   TINK MINESWEEPER
+   ========================================= */
+
+:root {
+    --ms-bg-color: #16222d;
+    --ms-grid-line: rgba(120, 180, 240, 0.12);
+    --ms-sketch-ink: #e2f1ff;
+
+    --ms-card-bg: rgba(22, 34, 45, 0.95);
+
+    --ms-accent-red: #ff5252;
+    --ms-accent-blue: #40c4ff;
+
+    --ms-tile-bg: #1e3042;
+    --ms-tile-hover: #294258;
+    --ms-tile-revealed: #0f1822;
+}
+
+
+/* =========================================
+   PAGE
+   ========================================= */
+
+.minesweeper-page {
+    width: 100%;
 
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    padding-top: 40px;
+    padding: 10px 20px 30px;
 }
 
-.minesweeper-controls {
-    margin-top: 10px;
+
+/* =========================================
+   PAGE HEADING
+   ========================================= */
+
+.game-page-heading {
+    width: min(850px, 100%);
+
+    margin: 0 auto 6px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
 }
 
-#reset-button {
+
+.mini-tink-logo {
+    font-family: "Caveat", cursive;
+
+    font-size: 1.8rem;
+    font-weight: 700;
+
+    color: #fbbf24;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.2s,
+        color 0.2s;
+}
+
+
+.mini-tink-logo:hover {
+    color: #fde68a;
+
+    transform:
+        rotate(-3deg)
+        scale(1.06);
+}
+
+
+.game-page-heading h1 {
+    margin: 0;
+
+    font-family:
+        "Architects Daughter",
+        cursive;
+
+    font-size: 1.8rem;
+
+    color: var(--ms-sketch-ink);
+}
+
+
+/* =========================================
+   SCREEN SHAKE
+   ========================================= */
+
+.shake-screen {
+    animation:
+        shake 0.5s
+        cubic-bezier(.36, .07, .19, .97)
+        both;
+}
+
+
+@keyframes shake {
+
+    10%,
+    90% {
+        transform: translate3d(-2px, 0, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(4px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-6px, 0, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(6px, 0, 0);
+    }
+}
+
+
+/* =========================================
+   GAME CONTAINER
+   ========================================= */
+
+.minesweeper-container {
+    position: relative;
+
+    width: fit-content;
+    max-width: calc(100vw - 40px);
+
+    margin: 0 auto;
+
+    padding: 14px 18px 16px;
+
+    background: var(--ms-card-bg);
+
+    border:
+        3px solid
+        var(--ms-sketch-ink);
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 12px 40px
+        rgba(0, 0, 0, 0.6);
+
+    color:
+        var(--ms-sketch-ink);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* =========================================
+   STATUS PANEL
+   ========================================= */
+
+.status-panel {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 6px;
+}
+
+
+.digital-counter {
+    font-family:
+        "VT323",
+        monospace;
+
+    font-size: 2rem;
+
+    background: #091017;
+    color: var(--ms-accent-red);
+
+    padding: 2px 8px;
+
+    min-width: 68px;
+
+    border:
+        1px solid
+        rgba(255, 82, 82, 0.3);
+
+    border-radius: 6px;
+
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   RESET FACE
+   ========================================= */
+
+.face-btn {
     width: 42px;
     height: 42px;
 
-    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    background-color: #c0c0c0;
+    border:
+        2px solid
+        var(--ms-sketch-ink);
 
-    border-top: 3px solid white;
-    border-left: 3px solid white;
-    border-right: 3px solid #808080;
-    border-bottom: 3px solid #808080;
+    border-radius: 50%;
+
+    background:
+        var(--ms-tile-bg);
+
+    font-size: 1.3rem;
 
     cursor: pointer;
+
+    box-shadow:
+        0 2px 5px
+        rgba(0, 0, 0, 0.3);
+
+    transition:
+        transform 0.1s,
+        background 0.2s,
+        box-shadow 0.2s;
 }
 
-#reset-button:active {
-    border-top: 3px solid #808080;
-    border-left: 3px solid #808080;
-    border-right: 3px solid white;
-    border-bottom: 3px solid white;
+
+.face-btn:hover {
+    background:
+        var(--ms-tile-hover);
+
+    transform:
+        scale(1.08)
+        rotate(-3deg);
 }
 
-.minesweeper-info {
-    margin-top: 10px;
+
+.face-btn:active {
+    transform: scale(0.95);
 }
 
-.minesweeper-info p {
-    margin: 0;
+
+/* =========================================
+   DIFFICULTY CONTROLS
+   ========================================= */
+
+.minesweeper-controls {
+    display: flex;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin: 6px 0 8px;
 }
+
+
+.difficulty-btn {
+    min-width: 76px;
+
+    padding: 4px 10px;
+
+    border:
+        2px solid
+        var(--ms-sketch-ink);
+
+    border-radius: 10px;
+
+    background: transparent;
+
+    color:
+        var(--ms-sketch-ink);
+
+    font-family:
+        "Patrick Hand",
+        cursive;
+
+    font-size: 0.95rem;
+
+    line-height: 1.05;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s,
+        color 0.2s,
+        transform 0.15s;
+}
+
+
+.difficulty-btn span {
+    display: block;
+
+    margin-top: 1px;
+
+    font-size: 0.65rem;
+
+    opacity: 0.65;
+}
+
+
+.difficulty-btn:hover {
+    transform:
+        translateY(-1px);
+}
+
+
+.difficulty-btn.active {
+    background:
+        var(--ms-sketch-ink);
+
+    color:
+        var(--ms-bg-color);
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   GAME STATUS
+   ========================================= */
+
+.game-status-message {
+    min-height: 20px;
+
+    margin: 0 0 6px;
+
+    text-align: center;
+
+    font-family:
+        "Patrick Hand",
+        cursive;
+
+    font-size: 1rem;
+
+    color:
+        var(--ms-accent-red);
+}
+
+
+/* =========================================
+   BOARD WRAPPER
+   ========================================= */
+
+.board-wrapper {
+    position: relative;
+
+    max-width: 100%;
+
+    padding: 8px;
+
+    background:
+        rgba(10, 16, 22, 0.7);
+
+    border:
+        2px solid
+        rgba(226, 241, 255, 0.15);
+
+    border-radius: 8px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+
+/* =========================================
+   BOARD
+   ========================================= */
 
 .minesweeper-board {
     display: grid;
 
-    grid-template-columns: repeat(var(--cols), 36px);
+    gap: 4px;
 
-    margin-top: 20px;
+    width: max-content;
+
+    margin: 0 auto;
 }
 
+
+/* =========================================
+   EASY
+   ========================================= */
+
+.minesweeper-board.easy-board .cell {
+    width: 38px;
+    height: 38px;
+}
+
+
+/* =========================================
+   MEDIUM
+   ========================================= */
+
+.minesweeper-board.medium-board .cell {
+    width: 31px;
+    height: 31px;
+
+    font-size: 1rem;
+}
+
+
+/* =========================================
+   HARD
+   ========================================= */
+
+.minesweeper-board.hard-board {
+    gap: 2px;
+}
+
+
+.minesweeper-board.hard-board .cell {
+    width: 26px;
+    height: 26px;
+
+    font-size: 0.82rem;
+}
+
+
+/* =========================================
+   CELLS
+   ========================================= */
+
 .cell {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
 
     padding: 0;
 
-    background-color: #c0c0c0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    border-top: 3px solid white;
-    border-left: 3px solid white;
-    border-right: 3px solid #808080;
-    border-bottom: 3px solid #808080;
+    background:
+        var(--ms-tile-bg);
+
+    border:
+        1px solid
+        rgba(226, 241, 255, 0.15);
+
+    border-radius: 4px;
+
+    color:
+        var(--ms-sketch-ink);
+
+    font-weight: bold;
+    font-size: 1.2rem;
 
     cursor: pointer;
+
+    transition:
+        background 0.15s,
+        transform 0.1s;
 }
 
-.cell.revealed {
-    background-color: #d0d0d0;
 
-    border: 1px solid #808080;
+.cell:hover:not(.revealed) {
+    background:
+        var(--ms-tile-hover);
+
+    transform:
+        translateY(-1px);
+}
+
+
+.cell.revealed {
+    background:
+        var(--ms-tile-revealed);
+
+    border-color:
+        rgba(226, 241, 255, 0.05);
 
     cursor: default;
 }
 
-.cell.mine-hit {
-    background-color: #ff6b6b;
+
+.cell.exploded {
+    background:
+        #e63946 !important;
+
+    animation:
+        pop 0.3s ease-out;
+}
+
+
+/* =========================================
+   NUMBER COLORS
+   ========================================= */
+
+.cell.n-1 {
+    color: #40c4ff;
+}
+
+
+.cell.n-2 {
+    color: #69f0ae;
+}
+
+
+.cell.n-3 {
+    color: #ff5252;
+}
+
+
+.cell.n-4 {
+    color: #b388ff;
+}
+
+
+.cell.n-5 {
+    color: #ffd740;
+}
+
+
+.cell.n-6 {
+    color: #ff6e40;
+}
+
+
+.cell.n-7 {
+    color: #f48fb1;
+}
+
+
+.cell.n-8 {
+    color: #b0bec5;
+}
+
+
+/* =========================================
+   PARTICLE CANVAS
+   ========================================= */
+
+#particleCanvas {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    z-index: 10;
+}
+
+
+/* =========================================
+   SCORE MESSAGE
+   ========================================= */
+
+#score-message {
+    margin: 5px 0 0;
+
+    color:
+        var(--ms-accent-blue);
+
+    text-align: center;
+
+    font-family:
+        "Patrick Hand",
+        cursive;
+
+    font-size: 0.95rem;
+}
+
+
+/* =========================================
+   EXPLOSION
+   ========================================= */
+
+@keyframes pop {
+
+    0% {
+        transform: scale(0.8);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* =========================================
+   SMALL SCREENS
+   ========================================= */
+
+@media (max-width: 700px) {
+
+    .minesweeper-page {
+        padding:
+            8px 10px 20px;
+    }
+
+
+    .game-page-heading {
+        width: 100%;
+
+        gap: 10px;
+    }
+
+
+    .game-page-heading h1 {
+        font-size: 1.5rem;
+    }
+
+
+    .mini-tink-logo {
+        font-size: 1.5rem;
+    }
+
+
+    .minesweeper-container {
+        max-width:
+            calc(100vw - 20px);
+
+        padding: 12px;
+    }
+
+
+    .status-panel {
+        gap: 8px;
+    }
+
+
+    .digital-counter {
+        min-width: 58px;
+
+        font-size: 1.7rem;
+    }
+
+
+    .face-btn {
+        width: 38px;
+        height: 38px;
+
+        font-size: 1.1rem;
+    }
+
+
+    .difficulty-btn {
+        min-width: 68px;
+
+        padding: 4px 7px;
+    }
+
+
+    .minesweeper-board.easy-board .cell {
+        width: 32px;
+        height: 32px;
+
+        font-size: 1rem;
+    }
+
+
+    .minesweeper-board.medium-board .cell {
+        width: 26px;
+        height: 26px;
+
+        font-size: 0.9rem;
+    }
+
+
+    .minesweeper-board.hard-board .cell {
+        width: 22px;
+        height: 22px;
+
+        font-size: 0.75rem;
+    }
 }

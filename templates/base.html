@@ -6,70 +6,97 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-
-    {% block styles %}
-    {% endblock %}
-
     <title>
         {% block title %}
         Tink
         {% endblock %}
     </title>
+
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <!-- handwritten fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&family=Short+Stack&family=Architects+Daughter&display=swap"
+        rel="stylesheet">
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+    <!-- Shared Tink CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+
+
+    {% block styles %}
+    {% endblock %}
 </head>
 
-<body>
 
-    <nav class="main-nav">
+<body class="
+        blueprint-mode
+        min-h-screen
+        font-hand
+        text-lg
+        transition-colors
+        duration-500
+        relative
+        overflow-x-hidden
+        selection:bg-yellow-300
+        selection:text-slate-900
+    ">
 
-        <a href="{{ url_for('home') }}">
-            Home
+
+<header class="workshop-toolbar">
+    <!-- Left Section: Logo & Quick Toggles -->
+    <div class="tool-group">
+        <a href="{{ url_for('home') }}" class="toolbar-logo">
+            <span class="logo-icon">💡</span> TiNK
         </a>
+        <button id="grid-toggle-btn" class="blueprint-tool-btn" type="button">
+            <span>🛠️</span> Paper Grid
+        </button>
+        <button id="sound-toggle-btn" class="blueprint-tool-btn" type="button">
+            <span id="sound-status-icon">🔊</span> <span id="sound-text">Sound On</span>
+        </button>
+    </div>
 
-        <a href="{{ url_for('games') }}">
-            Games
-        </a>
-
-        <a href="{{ url_for('score.leaderboard') }}">
-            Leaderboard
-        </a>
-
-        {% if session.get('user_id') %}
-
-        <a href="{{ url_for('score.scores') }}">
-            My Scores
-        </a>
-
-        <span>
-            Welcome, {{ session.get('username') }}
-        </span>
-
-        <a href="{{ url_for('auth.logout') }}">
-            Logout
-        </a>
-
-        {% else %}
-
-        <a href="{{ url_for('auth.login') }}">
-            Login
-        </a>
-
-        <a href="{{ url_for('auth.register') }}">
-            Create Account
-        </a>
-
-        {% endif %}
-
-    </nav>
-
-
+    <!-- Right Section: Blueprint Spec & Tinks -->
+    <div class="spec-group">
+        <span class="blueprint-spec-tag">DRAFT BLUEPRINT #2026</span>
+        <div class="tinks-badge">
+            <span>0</span> Tinks
+        </div>
+    </div>
+</header>
     {% block content %}
     {% endblock %}
 
+    <!-- Footer -->
+    <footer
+        class="max-w-6xl mx-auto px-6 py-8 border-t border-white/10 text-center text-sm opacity-75 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="font-sketch">
+            <span>© Tink Workshop • Single-Page Blueprint Concept</span>
+        </div>
+        <div class="flex gap-4 font-sketch">
+            <button onclick="sound.playTink(1000); alert('Tink is a minimalist, sketch-themed mini-game showcase!')"
+                class="hover:underline cursor-pointer">About Tink</button>
+            <button onclick="interactMascot()" class="hover:underline cursor-pointer">Talk to Tink</button>
+        </div>
+    </footer>
 
+
+    <!-- Shared theme / sound JavaScript -->
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
     {% block scripts %}
     {% endblock %}
-
 </body>
 
 </html>

@@ -1,96 +1,158 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Minesweeper | Tink
+Tink - Minesweeper
 {% endblock %}
 
+
 {% block styles %}
+
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="{{ url_for('static', filename='css/minesweeper.css') }}">
+
 {% endblock %}
+
 
 {% block content %}
 
-<main class="minesweeper-container">
+{% set current_difficulty = difficulty|default('easy', true) %}
 
-    <h1>Minesweeper</h1>
+<div class="minesweeper-page">
 
-    <div class="minesweeper-controls">
-        <button id="reset-button" type="button">
-            🙂
-        </button>
+    <!-- Page Heading -->
+    <div class="game-page-heading">
+
+        <a href="{{ url_for('home') }}" class="mini-tink-logo" title="Tink Home">
+            Tink
+        </a>
+
+        <h1>
+            Minesweeper
+        </h1>
+
     </div>
 
-    <p id="game-status">
-        Game in progress
-    </p>
 
-    <div class="minesweeper-info">
-        <p>
-            Flags left:
-            <span id="flags-left">
-                {{ mine_count }}
-            </span>
-        </p>
+    <!-- Game -->
+    <div class="minesweeper-container" id="gameContainer">
 
-        <p>
-            Time:
-            <span id="time" data-time="{{ time }}">
-                {{ time }}
-            </span>
-        </p>
+        <!-- Counters -->
+        <div class="status-panel">
 
-        <p>
-            Score:
-            <span id="score">0</span>
-        </p>
+            <div class="digital-counter">
+
+                <i class="fa-solid fa-flag"></i>
+
+                <span id="mineCount">
+                    {{ mine_count }}
+                </span>
+
+            </div>
+
+
+            <button id="reset-button" class="face-btn" type="button" title="New Game">
+                🙂
+            </button>
+
+
+            <div class="digital-counter">
+
+                <i class="fa-solid fa-stopwatch"></i>
+
+                <span id="time">
+                    {{ time }}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Difficulty -->
+        <div class="minesweeper-controls">
+
+            <input type="hidden" id="difficulty" value="{{ current_difficulty }}">
+
+            <button type="button" class="difficulty-btn {% if current_difficulty == 'easy' %}active{% endif %}"
+                data-difficulty="easy">
+                Easy
+                <span>9 × 9</span>
+            </button>
+
+            <button type="button" class="difficulty-btn {% if current_difficulty == 'medium' %}active{% endif %}"
+                data-difficulty="medium">
+                Medium
+                <span>16 × 16</span>
+            </button>
+
+            <button type="button" class="difficulty-btn {% if current_difficulty == 'hard' %}active{% endif %}"
+                data-difficulty="hard">
+                Hard
+                <span>16 × 30</span>
+            </button>
+
+        </div>
+
+
+        <!-- Messages -->
+        <p id="game-status" class="game-status-message"></p>
 
         <p id="score-message"></p>
+
+
+        <!-- Board -->
+        <div class="board-wrapper">
+
+            <canvas id="particleCanvas"></canvas>
+
+
+            <div class="minesweeper-board" data-new-game-url="{{ url_for('minesweeper.new_board') }}"
+                data-score-url="{{ url_for('score.save_score') }}"
+                data-logged-in="{{ 'true' if session.get('user_id') else 'false' }}" data-rows="{{ rows }}"
+                data-cols="{{ cols }}" data-mine-count="{{ mine_count }}" data-time="{{ time }}">
+
+                {% for row in board %}
+
+                {% set row_index = loop.index0 %}
+
+
+                {% for value in row %}
+
+                <button type="button" class="cell" data-row="{{ row_index }}" data-col="{{ loop.index0 }}"
+                    data-value="{{ value }}"></button>
+
+                {% endfor %}
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <!-- Hidden values used by JavaScript -->
+
+        <span id="flags-left" hidden>
+            {{ mine_count }}
+        </span>
+
+
+        <span id="score" hidden>
+            0
+        </span>
+
     </div>
 
-    <div>
-        <label for="difficulty">
-            Difficulty:
-        </label>
-
-        <select id="difficulty" name="difficulty">
-            <option value="easy" {% if difficulty=='easy' %}selected{% endif %}>
-                Easy
-            </option>
-
-            <option value="medium" {% if difficulty=='medium' %}selected{% endif %}>
-                Medium
-            </option>
-
-            <option value="hard" {% if difficulty=='hard' %}selected{% endif %}>
-                Hard
-            </option>
-        </select>
-    </div>
-
-    <div class="minesweeper-board" style="--cols: {{ cols }}; --rows: {{ rows }};" data-rows="{{ rows }}"
-        data-cols="{{ cols }}" data-mines="{{ mine_count }}" data-new-game-url="{{ url_for('minesweeper.new_board') }}"
-        data-score-url="{{ url_for('score.save_score') }}"
-        data-logged-in="{{ 'true' if session.get('user_id') else 'false' }}">
-
-        {% for row in range(rows) %}
-        {% for col in range(cols) %}
-
-        <button class="cell" data-row="{{ row }}" data-col="{{ col }}" data-value="{{ board[row][col] }}"
-            type="button"></button>
-
-        {% endfor %}
-        {% endfor %}
-
-    </div>
-
-    <a href="{{ url_for('games') }}">
-        Back to Games
-    </a>
-
-</main>
+</div>
 
 {% endblock %}
 
+
 {% block scripts %}
+
+<script src="{{ url_for('static', filename='js/minesweeper-effects.js') }}"></script>
+
 <script src="{{ url_for('static', filename='js/minesweeper.js') }}"></script>
+
 {% endblock %}
