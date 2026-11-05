@@ -4,10 +4,18 @@
 Tink
 {% endblock %}
 
+
+{% block styles %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+
+{% endblock %}
+
+
 {% block content %}
 
 <!-- Main Hero Section -->
-<main class="max-w-6xl mx-auto px-6 py-6 relative z-10">
+<main class="home-page max-w-6xl mx-auto px-6 py-6 relative z-10">
     <!-- Header Title & Interactive Logo -->
     <div class="text-center my-6 relative">
 
@@ -79,6 +87,92 @@ Tink
                 "Hi! I'm Tink! Pick a game blueprint below to start tinkering."
             </span>
         </div>
+    </div>
+
+    <!-- Account / Guest Status -->
+    <div class="home-account-panel">
+
+        {% if session.get('user_id') %}
+
+        <div class="account-status">
+
+            <span class="account-icon">
+                <i class="fa-solid fa-user-check"></i>
+            </span>
+
+            <div class="account-message">
+                <strong>
+                    Welcome, {{ session.get('username') }}!
+                </strong>
+
+                <span>
+                    Your game scores can be saved.
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="account-actions">
+
+            <a href="{{ url_for('score.scores') }}" class="account-btn secondary">
+                <i class="fa-solid fa-chart-simple"></i>
+                My Scores
+            </a>
+
+
+            <a href="{{ url_for('score.leaderboard') }}" class="account-btn secondary">
+                <i class="fa-solid fa-trophy"></i>
+                Leaderboard
+            </a>
+
+
+            <a href="{{ url_for('auth.logout') }}" class="account-btn logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Log Out
+            </a>
+
+        </div>
+
+
+        {% else %}
+
+        <div class="account-status">
+
+            <span class="account-icon">
+                <i class="fa-solid fa-user"></i>
+            </span>
+
+            <div class="account-message">
+                <strong>
+                    Playing as Guest
+                </strong>
+
+                <span>
+                    You can play now. Log in to save your scores.
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="account-actions">
+
+            <a href="{{ url_for('auth.login') }}" class="account-btn primary">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Log In
+            </a>
+
+
+            <a href="{{ url_for('auth.register') }}" class="account-btn secondary">
+                <i class="fa-solid fa-user-plus"></i>
+                Create Account
+            </a>
+
+        </div>
+
+        {% endif %}
+
     </div>
 
     <!-- Mini-Games Card Showcase Grid -->
@@ -194,14 +288,11 @@ Tink
             </div>
 
             <!-- Launch Action Button -->
-        <a
-            href="{{ url_for('minesweeper.minesweeper') }}"
-            onclick="sound.playTink(1100)"
-            class="w-full py-2.5 px-4 bg-rose-600 hover:bg-rose-700 text-white font-bold sketch-border transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm"
-        >
-            <i class="fa-solid fa-bomb"></i>
-            Play Minesweeper
-        </a>
+            <a href="{{ url_for('minesweeper.minesweeper') }}" onclick="sound.playTink(1100)"
+                class="w-full py-2.5 px-4 bg-rose-600 hover:bg-rose-700 text-white font-bold sketch-border transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm">
+                <i class="fa-solid fa-bomb"></i>
+                Play Minesweeper
+            </a>
         </div>
 
         <!-- Card 3: Snake Sketch -->

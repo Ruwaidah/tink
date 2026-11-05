@@ -54,28 +54,28 @@
     ">
 
 
-<header class="workshop-toolbar">
-    <!-- Left Section: Logo & Quick Toggles -->
-    <div class="tool-group">
-        <a href="{{ url_for('home') }}" class="toolbar-logo">
-            <span class="logo-icon">💡</span> TiNK
-        </a>
-        <button id="grid-toggle-btn" class="blueprint-tool-btn" type="button">
-            <span>🛠️</span> Paper Grid
-        </button>
-        <button id="sound-toggle-btn" class="blueprint-tool-btn" type="button">
-            <span id="sound-status-icon">🔊</span> <span id="sound-text">Sound On</span>
-        </button>
-    </div>
-
-    <!-- Right Section: Blueprint Spec & Tinks -->
-    <div class="spec-group">
-        <span class="blueprint-spec-tag">DRAFT BLUEPRINT #2026</span>
-        <div class="tinks-badge">
-            <span>0</span> Tinks
+    <header class="workshop-toolbar">
+        <!-- Left Section: Logo & Quick Toggles -->
+        <div class="tool-group">
+            <a href="{{ url_for('home') }}" class="toolbar-logo">
+                <span class="logo-icon">💡</span> TiNK
+            </a>
+            <button id="grid-toggle-btn" class="blueprint-tool-btn" type="button">
+                <span>🛠️</span> Paper Grid
+            </button>
+            <button id="sound-toggle-btn" class="blueprint-tool-btn" type="button">
+                <span id="sound-status-icon">🔊</span> <span id="sound-text">Sound On</span>
+            </button>
         </div>
-    </div>
-</header>
+
+        <!-- Right Section: Blueprint Spec & Tinks -->
+        <div class="spec-group">
+            <span class="blueprint-spec-tag">DRAFT BLUEPRINT #2026</span>
+            <div class="tinks-badge">
+                <span>0</span> Tinks
+            </div>
+        </div>
+    </header>
     {% block content %}
     {% endblock %}
 

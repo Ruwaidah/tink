@@ -1,35 +1,117 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Login | Tink
+Tink - Login
 {% endblock %}
 
+
+{% block styles %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+
+{% endblock %}
+
+
 {% block content %}
-<main>
-    <h1>Login</h1>
 
-    {% if error %}
-    <p>{{ error }}</p>
-    {% endif %}
+<main class="auth-page">
 
-    <form method="POST">
+    <section class="auth-card">
 
-        <label for="email">
-            Email
-        </label>
+        <div class="auth-icon">
+            <i class="fa-solid fa-right-to-bracket"></i>
+        </div>
 
-        <input id="email" name="email" type="email" required>
+        <h1>
+            Welcome Back
+        </h1>
 
-        <label for="password">
-            Password
-        </label>
+        <p class="auth-subtitle">
+            Log in to save your scores and keep tinkering.
+        </p>
 
-        <input id="password" name="password" type="password" required>
 
-        <button type="submit">
-            Login
-        </button>
-        <a href="{{url_for('home')}}">Cancel</a>
-    </form>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+
+        <div class="auth-message">
+
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+        {% endwith %}
+
+
+        <form method="POST" class="auth-form">
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <div class="input-wrap">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required
+                        autocomplete="email">
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-wrap">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required
+                        autocomplete="current-password">
+
+                </div>
+
+            </div>
+
+
+            <button type="submit" class="auth-primary-btn">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Log In
+            </button>
+
+        </form>
+
+
+        <div class="auth-links">
+
+            <p>
+                New to Tink?
+
+                <a href="{{ url_for('auth.register') }}">
+                    Create an account
+                </a>
+            </p>
+
+
+            <a href="{{ url_for('home') }}" class="guest-link">
+                <i class="fa-solid fa-gamepad"></i>
+                Continue as Guest
+            </a>
+
+        </div>
+
+    </section>
+
 </main>
+
 {% endblock %}

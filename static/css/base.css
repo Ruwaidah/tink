@@ -154,21 +154,36 @@
  /* =========================================
    WORKSHOP TOOLBAR (Top Header Bar)
    ========================================= */
+/* =========================================
+   FIXED WORKSHOP TOOLBAR LAYOUT
+   ========================================= */
 
- .workshop-toolbar {
-     width: 100%;
-     max-width: 1200px;
-     margin: 0 auto;
-     padding: 16px 24px;
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     border-bottom: 2px dashed rgba(226, 241, 255, 0.25);
-     background: rgba(13, 22, 32, 0.4);
-     backdrop-filter: blur(4px);
-     position: relative;
-     z-index: 100;
- }
+.workshop-toolbar {
+    width: 100%;
+    max-width: 100%;
+    background: rgba(13, 22, 32, 0.85);
+    border-bottom: 2px dashed rgba(226, 241, 255, 0.25);
+    padding: 12px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.workshop-toolbar .tool-group {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.workshop-toolbar .spec-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
 
  /* Toolbar Logo Style */
  .toolbar-logo {

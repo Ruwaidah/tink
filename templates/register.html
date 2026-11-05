@@ -1,32 +1,181 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Create Account | Tink
+Tink - Create Account
 {% endblock %}
 
+
+{% block styles %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+
+{% endblock %}
+
+
 {% block content %}
-<main>
-    <h1>Create Acount</h1>
-    {% if error %}
-    <p>{{error}}</p>
-    {% endif %}
 
-    {% if success %}
-    <p>{{ success }}</p>
-    {% endif %}
+<main class="auth-page">
 
-    <form method="POST">
-        <label for="username">Username</label>
-        <input id="" username name="username" type="text" required />
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required />
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" required />
-        <label for="confirm-password">Confirm Password</label>
-        <input id="confirm_password" name="confirm_password" type="password" required />
-        <button type="submit">Create Account</button>
-        <a type="button" href="{{url_for('home')}}">Cancel</a>
-    </form>
+    <section class="auth-card">
+
+        <div class="auth-icon">
+            <i class="fa-solid fa-user-plus"></i>
+        </div>
+
+
+        <h1>
+            Create Account
+        </h1>
+
+
+        <p class="auth-subtitle">
+            Join Tink to save your scores and track your progress.
+        </p>
+
+
+        {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+
+        <div class="auth-message">
+
+            {% for message in messages %}
+
+            <p>
+                {{ message }}
+            </p>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+        {% endwith %}
+
+
+        <form method="POST" class="auth-form">
+
+            <!-- Username -->
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+
+                <div class="input-wrap">
+
+                    <i class="fa-solid fa-user"></i>
+
+
+                    <input type="text" id="username" name="username" placeholder="Choose a username" required
+                        autocomplete="username">
+
+                </div>
+
+            </div>
+
+
+            <!-- Email -->
+            <div class="form-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+
+                <div class="input-wrap">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required
+                        autocomplete="email">
+
+                </div>
+
+            </div>
+
+
+            <!-- Password -->
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+
+                <div class="input-wrap">
+
+                    <i class="fa-solid fa-lock"></i>
+
+
+                    <input type="password" id="password" name="password" placeholder="Create a password" required
+                        autocomplete="new-password">
+
+                </div>
+
+            </div>
+
+
+            <!-- Confirm Password -->
+            <div class="form-group">
+
+                <label for="confirm_password">
+                    Confirm Password
+                </label>
+
+
+                <div class="input-wrap">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+
+                    <input type="password" id="confirm_password" name="confirm_password"
+                        placeholder="Enter password again" required autocomplete="new-password">
+
+                </div>
+
+            </div>
+
+
+            <button type="submit" class="auth-primary-btn">
+
+                <i class="fa-solid fa-user-plus"></i>
+
+                Create Account
+
+            </button>
+
+        </form>
+
+
+        <div class="auth-links">
+
+            <p>
+
+                Already have an account?
+
+                <a href="{{ url_for('auth.login') }}">
+                    Log In
+                </a>
+
+            </p>
+
+
+            <a href="{{ url_for('home') }}" class="guest-link">
+
+                <i class="fa-solid fa-gamepad"></i>
+
+                Continue as Guest
+
+            </a>
+
+        </div>
+
+    </section>
+
 </main>
 
 {% endblock %}
