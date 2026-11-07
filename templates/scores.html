@@ -1,65 +1,297 @@
 {% extends 'base.html' %}
 
 {% block title %}
-My Scores | Tink
+Tink - My Scores
 {% endblock %}
+
+
+{% block styles %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/scores.css') }}">
+
+{% endblock %}
+
 
 {% block content %}
 
-<main>
+<main class="scores-page">
 
-    <h1>My Scores</h1>
+    <section class="scores-panel">
 
-    <h2>Best Scores</h2>
+        <!-- Page Header -->
+        <div class="scores-heading">
 
-    <p>
-        Easy:
-        {% if best_scores.easy is not none %}
-        {{ best_scores.easy }}
-        {% else %}
-        No score yet
-        {% endif %}
-    </p>
+            <div class="scores-heading-icon">
+                <i class="fa-solid fa-chart-simple"></i>
+            </div>
 
-    <p>
-        Medium:
-        {% if best_scores.medium is not none %}
-        {{ best_scores.medium }}
-        {% else %}
-        No score yet
-        {% endif %}
-    </p>
+            <div>
+                <h1>My Scores</h1>
 
-    <p>
-        Hard:
-        {% if best_scores.hard is not none %}
-        {{ best_scores.hard }}
-        {% else %}
-        No score yet
-        {% endif %}
-    </p>
+                <p>
+                    Track your best Minesweeper results.
+                </p>
+            </div>
 
-    <h2>Score History</h2>
+        </div>
 
-    {% if scores %}
 
-    {% for score in scores %}
-    <p>
-        {{ score.difficulty }}
-        -
-        {{ score.score }}
-    </p>
-    {% endfor %}
+        <!-- Best Scores -->
+        <section class="best-scores-section">
 
-    {% else %}
+            <div class="section-title">
 
-    <p>No saved scores yet.</p>
+                <i class="fa-solid fa-star"></i>
 
-    {% endif %}
+                <h2>
+                    Best Scores
+                </h2>
 
-    <a href="{{ url_for('games') }}">
-        Back to Games
-    </a>
+            </div>
+
+
+            <div class="best-score-grid">
+
+                <!-- Easy -->
+                <div class="best-score-card easy">
+
+                    <div class="difficulty-icon">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+
+                    <span class="difficulty-name">
+                        Easy
+                    </span>
+
+
+                    {% if best_scores.easy is not none %}
+
+                    <strong>
+                        {{ best_scores.easy }}
+                    </strong>
+
+                    <span class="score-label">
+                        points
+                    </span>
+
+                    {% else %}
+
+                    <strong class="no-score">
+                        —
+                    </strong>
+
+                    <span class="score-label">
+                        No score yet
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Medium -->
+                <div class="best-score-card medium">
+
+                    <div class="difficulty-icon">
+                        <i class="fa-solid fa-puzzle-piece"></i>
+                    </div>
+
+                    <span class="difficulty-name">
+                        Medium
+                    </span>
+
+
+                    {% if best_scores.medium is not none %}
+
+                    <strong>
+                        {{ best_scores.medium }}
+                    </strong>
+
+                    <span class="score-label">
+                        points
+                    </span>
+
+                    {% else %}
+
+                    <strong class="no-score">
+                        —
+                    </strong>
+
+                    <span class="score-label">
+                        No score yet
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Hard -->
+                <div class="best-score-card hard">
+
+                    <div class="difficulty-icon">
+                        <i class="fa-solid fa-bomb"></i>
+                    </div>
+
+                    <span class="difficulty-name">
+                        Hard
+                    </span>
+
+
+                    {% if best_scores.hard is not none %}
+
+                    <strong>
+                        {{ best_scores.hard }}
+                    </strong>
+
+                    <span class="score-label">
+                        points
+                    </span>
+
+                    {% else %}
+
+                    <strong class="no-score">
+                        —
+                    </strong>
+
+                    <span class="score-label">
+                        No score yet
+                    </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Score History -->
+        <section class="score-history-section">
+
+            <div class="section-title">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                <h2>
+                    Score History
+                </h2>
+
+            </div>
+
+
+            {% if scores %}
+
+            <div class="score-table-wrapper">
+
+                <table class="score-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>Difficulty</th>
+                            <th>Score</th>
+                            <th>Date</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for score in scores %}
+
+                        <tr>
+
+                            <td>
+
+                                <span class="difficulty-pill {{ score.difficulty }}">
+
+                                    {{ score.difficulty|capitalize }}
+
+                                </span>
+
+                            </td>
+
+
+                            <td class="score-number">
+
+                                {{ score.score }}
+
+                            </td>
+
+
+                            <td>
+
+                                {% if score.created_at %}
+
+                                {{ score.created_at.strftime('%b %d, %Y') }}
+
+                                {% else %}
+
+                                —
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            {% else %}
+
+            <div class="empty-scores">
+
+                <i class="fa-solid fa-flag-checkered"></i>
+
+                <h3>
+                    No saved scores yet
+                </h3>
+
+                <p>
+                    Win a Minesweeper game and your score will appear here.
+                </p>
+
+
+                <a href="{{ url_for('minesweeper.minesweeper') }}" class="play-btn">
+                    <i class="fa-solid fa-bomb"></i>
+
+                    Play Minesweeper
+                </a>
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- Navigation -->
+        <div class="scores-actions">
+
+            <a href="{{ url_for('home') }}" class="scores-link">
+                <i class="fa-solid fa-house"></i>
+                Home
+            </a>
+
+
+            <a href="{{ url_for('score.leaderboard') }}" class="scores-link">
+                <i class="fa-solid fa-trophy"></i>
+                Leaderboard
+            </a>
+
+        </div>
+
+    </section>
 
 </main>
 

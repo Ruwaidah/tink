@@ -1,0 +1,376 @@
+/* =========================================
+   TINK LEADERBOARD
+   ========================================= */
+
+.leaderboard-page {
+    width: 100%;
+
+    min-height:
+        calc(100vh - 150px);
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding:
+        42px 20px 70px;
+}
+
+
+.leaderboard-panel {
+    width: 100%;
+    max-width: 760px;
+
+    padding:
+        28px 30px;
+
+    background:
+        rgba(15, 30, 48, 0.95);
+
+    border:
+        3px solid rgba(226, 241, 255, 0.9);
+
+    border-radius:
+        10px 24px 10px 22px;
+
+    box-shadow:
+        0 16px 45px rgba(0, 0, 0, 0.35);
+
+    color: #e2f1ff;
+}
+
+
+/* =========================================
+   MAIN TITLE
+   ========================================= */
+
+.leaderboard-panel>h1 {
+    margin:
+        0 0 26px;
+
+    text-align: center;
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 2.7rem;
+
+    color: #ffffff;
+}
+
+
+.leaderboard-panel>h1::before {
+    content: "🏆";
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 2rem;
+}
+
+
+/* =========================================
+   DIFFICULTIES
+   ========================================= */
+
+.leaderboard-panel h2 {
+    margin:
+        22px 0 10px;
+
+    padding-bottom: 7px;
+
+    border-bottom:
+        1px dashed rgba(226, 241, 255, 0.3);
+
+    font-family:
+        "Architects Daughter",
+        cursive;
+
+    font-size: 1.25rem;
+
+    color: #fbbf24;
+}
+
+
+.leaderboard-panel h2:nth-of-type(1)::before {
+    content: "🌱 ";
+}
+
+
+.leaderboard-panel h2:nth-of-type(2)::before {
+    content: "🧩 ";
+}
+
+
+.leaderboard-panel h2:nth-of-type(3)::before {
+    content: "💣 ";
+}
+
+
+/* =========================================
+   EMPTY STATE
+   ========================================= */
+
+.leaderboard-panel p {
+    margin:
+        8px 0 18px;
+
+    padding: 18px;
+
+    border:
+        1px dashed rgba(226, 241, 255, 0.25);
+
+    border-radius: 8px;
+
+    background:
+        rgba(255, 255, 255, 0.04);
+
+    text-align: center;
+
+    font-family:
+        "Patrick Hand",
+        cursive;
+
+    color:
+        rgba(226, 241, 255, 0.7);
+}
+
+
+/* =========================================
+   LIST RESULTS
+   ========================================= */
+
+.leaderboard-panel ol,
+.leaderboard-panel ul {
+    margin:
+        0 0 20px;
+
+    padding: 0;
+
+    list-style: none;
+}
+
+
+.leaderboard-panel li {
+    margin-bottom: 7px;
+
+    padding:
+        10px 14px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border:
+        1px solid rgba(226, 241, 255, 0.15);
+
+    border-radius:
+        6px 13px 7px 12px;
+
+    background:
+        rgba(255, 255, 255, 0.05);
+
+    font-family:
+        "Patrick Hand",
+        cursive;
+}
+
+
+.leaderboard-panel li:nth-child(1) {
+    border-color:
+        rgba(251, 191, 36, 0.6);
+}
+
+
+.leaderboard-panel li:nth-child(2) {
+    border-color:
+        rgba(203, 213, 225, 0.5);
+}
+
+
+.leaderboard-panel li:nth-child(3) {
+    border-color:
+        rgba(217, 119, 6, 0.5);
+}
+
+
+/* =========================================
+   TABLE SUPPORT
+   ========================================= */
+
+.leaderboard-panel table {
+    width: 100%;
+
+    margin-bottom: 22px;
+
+    border-collapse: collapse;
+
+    font-family:
+        "Patrick Hand",
+        cursive;
+
+    border:
+        1px solid rgba(226, 241, 255, 0.18);
+
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+
+.leaderboard-panel th {
+    padding:
+        9px 13px;
+
+    text-align: left;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    color:
+        rgba(226, 241, 255, 0.7);
+}
+
+
+.leaderboard-panel td {
+    padding:
+        10px 13px;
+
+    border-top:
+        1px solid rgba(226, 241, 255, 0.1);
+}
+
+
+/* =========================================
+   LINKS
+   ========================================= */
+
+.leaderboard-panel>a {
+    margin:
+        18px 5px 0;
+
+    padding:
+        7px 12px;
+
+    display: inline-flex;
+    align-items: center;
+
+    border:
+        1px solid rgba(226, 241, 255, 0.4);
+
+    border-radius: 7px;
+
+    background:
+        rgba(255, 255, 255, 0.05);
+
+    color: #e2f1ff;
+
+    text-decoration: none;
+
+    font-family:
+        "Patrick Hand",
+        cursive;
+
+    transition:
+        transform 0.15s,
+        background 0.2s;
+}
+
+
+.leaderboard-panel>a:hover {
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================
+   PAPER MODE
+   ========================================= */
+
+body.paper-mode .leaderboard-panel {
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border-color: #334155;
+
+    color: #334155;
+
+    box-shadow:
+        0 16px 40px rgba(15, 23, 42, 0.12);
+}
+
+
+body.paper-mode .leaderboard-panel>h1 {
+    color: #1e293b;
+}
+
+
+body.paper-mode .leaderboard-panel h2 {
+    border-color: #cbd5e1;
+}
+
+
+body.paper-mode .leaderboard-panel p {
+    background: #f8fafc;
+
+    border-color: #cbd5e1;
+
+    color: #64748b;
+}
+
+
+body.paper-mode .leaderboard-panel li {
+    background: #f8fafc;
+
+    border-color: #cbd5e1;
+}
+
+
+body.paper-mode .leaderboard-panel th {
+    background: #f1f5f9;
+
+    color: #475569;
+}
+
+
+body.paper-mode .leaderboard-panel td {
+    border-color: #e2e8f0;
+}
+
+
+body.paper-mode .leaderboard-panel>a {
+    color: #334155;
+
+    background: #ffffff;
+
+    border-color: #94a3b8;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 650px) {
+
+    .leaderboard-page {
+        padding:
+            28px 12px 50px;
+    }
+
+
+    .leaderboard-panel {
+        padding:
+            22px 16px;
+    }
+
+
+    .leaderboard-panel>h1 {
+        font-size: 2.3rem;
+    }
+}

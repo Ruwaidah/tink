@@ -1,0 +1,600 @@
+/* =========================================
+   TINK SCORES
+   ========================================= */
+
+.scores-page {
+    width: 100%;
+
+    min-height:
+        calc(100vh - 150px);
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding:
+        42px 20px 70px;
+}
+
+
+.scores-panel {
+    width: 100%;
+    max-width: 760px;
+
+    padding:
+        28px 30px;
+
+    background:
+        rgba(15, 30, 48, 0.95);
+
+    border:
+        3px solid rgba(226, 241, 255, 0.9);
+
+    border-radius:
+        10px 24px 10px 22px;
+
+    box-shadow:
+        0 16px 45px rgba(0, 0, 0, 0.35);
+
+    color: #e2f1ff;
+}
+
+
+/* =========================================
+   HEADING
+   ========================================= */
+
+.scores-heading {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 28px;
+}
+
+
+.scores-heading-icon {
+    width: 54px;
+    height: 54px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    border:
+        2px solid #fbbf24;
+
+    background:
+        rgba(251, 191, 36, 0.12);
+
+    color: #fbbf24;
+
+    font-size: 1.25rem;
+}
+
+
+.scores-heading h1 {
+    margin: 0;
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 2.5rem;
+
+    color: #ffffff;
+}
+
+
+.scores-heading p {
+    margin: 0;
+
+    font-family:
+        "Patrick Hand",
+        cursive;
+
+    color:
+        rgba(226, 241, 255, 0.68);
+}
+
+
+/* =========================================
+   SECTION TITLES
+   ========================================= */
+
+.section-title {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 14px;
+
+    color: #fbbf24;
+}
+
+
+.section-title h2 {
+    margin: 0;
+
+    font-family:
+        "Architects Daughter",
+        cursive;
+
+    font-size: 1.2rem;
+}
+
+
+/* =========================================
+   BEST SCORES
+   ========================================= */
+
+.best-score-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin-bottom: 32px;
+}
+
+
+.best-score-card {
+    min-height: 150px;
+
+    padding: 18px 12px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px dashed rgba(226, 241, 255, 0.35);
+
+    border-radius:
+        7px 17px 8px 16px;
+
+    background:
+        rgba(255, 255, 255, 0.06);
+
+    text-align: center;
+}
+
+
+.difficulty-icon {
+    width: 36px;
+    height: 36px;
+
+    margin-bottom: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+}
+
+
+.best-score-card.easy .difficulty-icon {
+    color: #69f0ae;
+}
+
+
+.best-score-card.medium .difficulty-icon {
+    color: #40c4ff;
+}
+
+
+.best-score-card.hard .difficulty-icon {
+    color: #ff5252;
+}
+
+
+.difficulty-name {
+    font-family:
+        "Patrick Hand",
+        cursive;
+
+    font-size: 1rem;
+
+    opacity: 0.8;
+}
+
+
+.best-score-card strong {
+    margin-top: 4px;
+
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 2.3rem;
+
+    color: #ffffff;
+}
+
+
+.best-score-card .no-score {
+    opacity: 0.45;
+}
+
+
+.score-label {
+    font-family:
+        "Patrick Hand",
+        cursive;
+
+    font-size: 0.82rem;
+
+    opacity: 0.55;
+}
+
+
+/* =========================================
+   HISTORY
+   ========================================= */
+
+.score-history-section {
+    padding-top: 24px;
+
+    border-top:
+        1px dashed rgba(226, 241, 255, 0.25);
+}
+
+
+.score-table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+
+    border:
+        1px solid rgba(226, 241, 255, 0.18);
+
+    border-radius: 8px;
+}
+
+
+.score-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    font-family:
+        "Patrick Hand",
+        cursive;
+}
+
+
+.score-table th {
+    padding: 10px 14px;
+
+    text-align: left;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    color:
+        rgba(226, 241, 255, 0.7);
+
+    font-size: 0.85rem;
+}
+
+
+.score-table td {
+    padding: 11px 14px;
+
+    border-top:
+        1px solid rgba(226, 241, 255, 0.1);
+}
+
+
+.score-number {
+    font-family:
+        "Caveat",
+        cursive;
+
+    font-size: 1.4rem;
+
+    font-weight: bold;
+
+    color: #fbbf24;
+}
+
+
+/* =========================================
+   DIFFICULTY PILLS
+   ========================================= */
+
+.difficulty-pill {
+    display: inline-block;
+
+    min-width: 65px;
+
+    padding: 3px 8px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    font-size: 0.82rem;
+}
+
+
+.difficulty-pill.easy {
+    color: #69f0ae;
+
+    background:
+        rgba(105, 240, 174, 0.1);
+}
+
+
+.difficulty-pill.medium {
+    color: #40c4ff;
+
+    background:
+        rgba(64, 196, 255, 0.1);
+}
+
+
+.difficulty-pill.hard {
+    color: #ff8a80;
+
+    background:
+        rgba(255, 82, 82, 0.1);
+}
+
+
+/* =========================================
+   EMPTY STATE
+   ========================================= */
+
+.empty-scores {
+    padding: 34px 20px;
+
+    text-align: center;
+
+    border:
+        1px dashed rgba(226, 241, 255, 0.28);
+
+    border-radius: 10px;
+
+    background:
+        rgba(255, 255, 255, 0.04);
+}
+
+
+.empty-scores>i {
+    margin-bottom: 10px;
+
+    color: #fbbf24;
+
+    font-size: 2rem;
+}
+
+
+.empty-scores h3 {
+    margin: 0;
+
+    font-family:
+        "Architects Daughter",
+        cursive;
+
+    font-size: 1.15rem;
+}
+
+
+.empty-scores p {
+    margin:
+        6px 0 16px;
+
+    font-family:
+        "Patrick Hand",
+        cursive;
+
+    opacity: 0.65;
+}
+
+
+.play-btn {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding:
+        8px 14px;
+
+    border-radius:
+        6px 13px 7px 12px;
+
+    background: #f43f5e;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-family:
+        "Patrick Hand",
+        cursive;
+
+    transition:
+        transform 0.15s,
+        background 0.2s;
+}
+
+
+.play-btn:hover {
+    background: #e11d48;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================
+   BOTTOM ACTIONS
+   ========================================= */
+
+.scores-actions {
+    margin-top: 22px;
+
+    display: flex;
+    justify-content: center;
+
+    gap: 12px;
+}
+
+
+.scores-link {
+    padding:
+        7px 11px;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 6px;
+
+    border:
+        1px solid rgba(226, 241, 255, 0.35);
+
+    border-radius: 7px;
+
+    background:
+        rgba(255, 255, 255, 0.05);
+
+    color: #e2f1ff;
+
+    text-decoration: none;
+
+    font-family:
+        "Patrick Hand",
+        cursive;
+}
+
+
+.scores-link:hover {
+    background:
+        rgba(255, 255, 255, 0.12);
+}
+
+
+/* =========================================
+   PAPER MODE
+   ========================================= */
+
+body.paper-mode .scores-panel {
+    background:
+        rgba(255, 255, 255, 0.95);
+
+    border-color: #334155;
+
+    color: #334155;
+
+    box-shadow:
+        0 16px 40px rgba(15, 23, 42, 0.12);
+}
+
+
+body.paper-mode .scores-heading h1 {
+    color: #1e293b;
+}
+
+
+body.paper-mode .scores-heading p {
+    color: #64748b;
+}
+
+
+body.paper-mode .best-score-card {
+    background:
+        rgba(248, 250, 252, 0.9);
+
+    border-color: #cbd5e1;
+}
+
+
+body.paper-mode .best-score-card strong {
+    color: #1e293b;
+}
+
+
+body.paper-mode .score-history-section {
+    border-color: #cbd5e1;
+}
+
+
+body.paper-mode .score-table-wrapper {
+    border-color: #cbd5e1;
+}
+
+
+body.paper-mode .score-table th {
+    background: #f1f5f9;
+
+    color: #475569;
+}
+
+
+body.paper-mode .score-table td {
+    border-color: #e2e8f0;
+}
+
+
+body.paper-mode .empty-scores {
+    background:
+        rgba(248, 250, 252, 0.85);
+
+    border-color: #cbd5e1;
+}
+
+
+body.paper-mode .scores-link {
+    color: #334155;
+
+    border-color: #94a3b8;
+
+    background: #ffffff;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 650px) {
+
+    .scores-page {
+        padding:
+            28px 12px 50px;
+    }
+
+
+    .scores-panel {
+        padding:
+            22px 16px;
+    }
+
+
+    .best-score-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .best-score-card {
+        min-height: 110px;
+    }
+
+
+    .scores-actions {
+        flex-wrap: wrap;
+    }
+}

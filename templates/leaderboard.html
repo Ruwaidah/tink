@@ -4,59 +4,68 @@
 Leaderboard | Tink
 {% endblock %}
 
+{% block styles %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/leaderboard.css') }}">
+
+{% endblock %}
+
 {% block content %}
 
-<main>
+<main class="leaderboard-page">
 
-    <h1>Leaderboard</h1>
+    <section class="leaderboard-panel">
 
-    <h2>Easy</h2>
+        <h1>Leaderboard</h1>
 
-    {% for score, user in easy_scores %}
-    <p>
-        {{ loop.index }}.
-        {{ user.username }}
-        -
-        {{ score.score }}
-    </p>
-    {% else %}
-    <p>No scores yet.</p>
-    {% endfor %}
+        <h2>Easy</h2>
 
-    <h2>Medium</h2>
+        {% for score, user in easy_scores %}
+        <p>
+            {{ loop.index }}.
+            {{ user.username }}
+            -
+            {{ score.score }}
+        </p>
+        {% else %}
+        <p>No scores yet.</p>
+        {% endfor %}
 
-    {% for score, user in medium_scores %}
-    <p>
-        {{ loop.index }}.
-        {{ user.username }}
-        -
-        {{ score.score }}
-    </p>
-    {% else %}
-    <p>No scores yet.</p>
-    {% endfor %}
+        <h2>Medium</h2>
 
-    <h2>Hard</h2>
+        {% for score, user in medium_scores %}
+        <p>
+            {{ loop.index }}.
+            {{ user.username }}
+            -
+            {{ score.score }}
+        </p>
+        {% else %}
+        <p>No scores yet.</p>
+        {% endfor %}
 
-    {% for score, user in hard_scores %}
-    <p>
-        {{ loop.index }}.
-        {{ user.username }}
-        -
-        {{ score.score }}
-    </p>
-    {% else %}
-    <p>No scores yet.</p>
-    {% endfor %}
+        <h2>Hard</h2>
 
-    <a href="{{ url_for('home') }}">
-        Home
-    </a>
+        {% for score, user in hard_scores %}
+        <p>
+            {{ loop.index }}.
+            {{ user.username }}
+            -
+            {{ score.score }}
+        </p>
+        {% else %}
+        <p>No scores yet.</p>
+        {% endfor %}
 
-    <a href="{{ url_for('games') }}">
-        Play Games
-    </a>
+        <a href="{{ url_for('home') }}">
+            Home
+        </a>
+
+        <a href="{{ url_for('games') }}">
+            Play Games
+        </a>
+
+    </section>
 
 </main>
-
 {% endblock %}
